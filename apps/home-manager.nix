@@ -20,7 +20,14 @@
     programs.home-manager.enable = true;
 
     home.packages = [
-      pkgs.htop pkgs.nix-zsh-completions
+      pkgs.htop
+      pkgs.nix-zsh-completions
+      pkgs.jetbrains-mono
+      pkgs.android-studio
+      pkgs.androidStudioPackages.beta
+      pkgs.androidStudioPackages.canary
+      pkgs.jetbrains.idea-community
+      pkgs.jetbrains.pycharm-community
     ];
 
     programs.zsh = {
@@ -34,7 +41,7 @@
     };
 
     programs.git = {
-      enable = false;
+      enable = true;
       userName = "Hadi";
       userEmail = "hadilashkari@gmail.com";
     };
@@ -71,7 +78,6 @@
       defaultCacheTtl = 1800;
       enableSshSupport = true;
     };
-
 
     home.stateVersion = "20.09";
   };

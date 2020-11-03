@@ -30,7 +30,6 @@
     gimp
     yakuake
     patchelf
-    android-studio
     openjdk
   ];
 
