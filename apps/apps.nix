@@ -1,5 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  androidComposition = pkgs.androidenv.composeAndroidPackages {
+    includeEmulator = true;
+    includeSources = true;
+    includeDocs = true;
+    includeSystemImages = true;
+    systemImageTypes = [ "default" ];
+    includeNDK = true;
+    useGoogleAPIs = true;
+  };
+in
 {
   imports = [ ];
 
@@ -14,6 +25,10 @@
     aspellDicts.en
     aspellDicts.ca
     vim_configurable
+    vimPlugins.vim-flutter
+    vimPlugins.vim-flatbuffers
+    vimPlugins.vim-android
+    vimPlugins.rust-vim
     git
     openssl
     mkpasswd
@@ -29,15 +44,24 @@
     libreoffice
     gimp
     yakuake
+    rclone
     patchelf
     openjdk
+    flutterPackages.beta
+    flutter
+    clang
+    rustc
+    rustfmt
+    rustPackages.clippy
+    cargo
+    cargo-make
+    flatbuffers
+    androidComposition.androidsdk
   ];
 
+
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (pkg.pname or (builtins.parseDrvName pkg.name).name) [
-  #   # unfree whitelist
-  #   "idea"
-  # ]);
+  nixpkgs.config.android_sdk.accept_license = true;
 
   programs.zsh = {
     enable = true;
@@ -46,13 +70,10 @@
   };
   programs.zsh.ohMyZsh.enable = true;
 
-  # nixpkgs.overlays = [
-  #     (final: prev: {
-  #       firefox = prev.firefox.overrideAttrs (_: {
-  #           postInstall = "sed -i 's/Exec=firefox %U/Exec=firefox -P --no-remote %U/' $out/share/applications/firefox.desktop";
-  #         });
-  #     })
-  #   ];
+  programs.screen.screenrc = ''
+    defscrollback 5000
+  '';
 
+  programs.adb.enable = true;
 
 }
