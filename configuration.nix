@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./boot.nix
       ./users.nix
+      ./services.nix
       ./apps/apps.nix
       ./apps/virtualisation.nix
       ./apps/home-manager.nix

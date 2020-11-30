@@ -1,5 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  androidComposition = pkgs.androidenv.composeAndroidPackages {
+    includeEmulator = true;
+    includeSources = true;
+    includeDocs = true;
+    includeSystemImages = true;
+    systemImageTypes = [ "default" ];
+    includeNDK = true;
+    useGoogleAPIs = true;
+  };
+in
 {
   imports =
   [
@@ -20,6 +31,7 @@
     programs.home-manager.enable = true;
 
     home.packages = [
+      androidComposition.androidsdk
       pkgs.htop
       pkgs.nix-zsh-completions
       pkgs.android-file-transfer
@@ -36,8 +48,9 @@
       enable = true;
       enableCompletion = true;
       initExtra = ''
-        # export ANDROID_NDK_HOME="$HOME/Android/Sdk/ndk-bundle"
-        # export NDK="$ANDROID_NDK_HOME"
+        export ANDROID_HOME="${androidComposition.androidsdk}/libexec/android-sdk"
+        export ANDROID_NDK_HOME="$ANDROID_HOME/ndk-bundle"
+        export NDK="$ANDROID_NDK_HOME"
       '';
 
       oh-my-zsh = {

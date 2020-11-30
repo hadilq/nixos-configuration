@@ -1,16 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  androidComposition = pkgs.androidenv.composeAndroidPackages {
-    includeEmulator = true;
-    includeSources = true;
-    includeDocs = true;
-    includeSystemImages = true;
-    systemImageTypes = [ "default" ];
-    includeNDK = true;
-    useGoogleAPIs = true;
-  };
-in
 {
   imports = [ ];
 
@@ -56,7 +45,6 @@ in
     cargo
     cargo-make
     flatbuffers
-    androidComposition.androidsdk
   ];
 
 
