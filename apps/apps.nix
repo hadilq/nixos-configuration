@@ -18,6 +18,7 @@
     vimPlugins.vim-flatbuffers
     vimPlugins.vim-android
     vimPlugins.rust-vim
+    vimPlugins.vim-ruby
     git
     openssl
     mkpasswd
@@ -35,7 +36,14 @@
     yakuake
     rclone
     patchelf
-    openjdk
+    openjdk8
+    openjdk11
+    android-studio
+    androidStudioPackages.beta
+    androidStudioPackages.canary
+    jetbrains.idea-community
+    jetbrains.pycharm-community
+    python38Packages.conda
     flutterPackages.beta
     flutter
     clang
@@ -46,7 +54,6 @@
     cargo-make
     flatbuffers
   ];
-
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.android_sdk.accept_license = true;
@@ -64,4 +71,9 @@
 
   programs.adb.enable = true;
 
+  programs.java = {
+    enable = true;
+  };
+
+  environment.variables.ANDROID="/libexec/android-sdk";
 }

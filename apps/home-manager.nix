@@ -17,6 +17,13 @@ in
     <home-manager/nixos>
   ];
 
+  environment.etc = with pkgs; {
+    "jdk".source = openjdk8;
+    "jdk8".source = openjdk8;
+    "jdk11".source = openjdk11;
+    "android-sdk".source = androidComposition.androidsdk;
+  };
+
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
       inherit pkgs;
@@ -36,21 +43,16 @@ in
       pkgs.nix-zsh-completions
       pkgs.android-file-transfer
       pkgs.jetbrains-mono
-      pkgs.android-studio
-      pkgs.androidStudioPackages.beta
-      pkgs.androidStudioPackages.canary
-      pkgs.jetbrains.idea-community
-      pkgs.jetbrains.pycharm-community
-      pkgs.python38Packages.conda
     ];
 
     programs.zsh = {
       enable = true;
       enableCompletion = true;
       initExtra = ''
-        export ANDROID_HOME="${androidComposition.androidsdk}/libexec/android-sdk"
+        export ANDROID_HOME=/etc/android-sdk/libexec/android-sdk
         export ANDROID_NDK_HOME="$ANDROID_HOME/ndk-bundle"
         export NDK="$ANDROID_NDK_HOME"
+        export JAVA_HOME=/etc/jdk
       '';
 
       oh-my-zsh = {
@@ -83,9 +85,24 @@ in
 
     programs.vim = {
       enable = true;
+      plugins = with pkgs.vimPlugins; [ 
+        vim-flutter
+        vim-flatbuffers
+        vim-android
+        rust-vim
+        vim-ruby
+      ];
       settings = { ignorecase = true; };
       extraConfig = ''
         syntax on
+        filetype plugin indent on 
+        " On pressing tab, insert 2 spaces
+        set expandtab
+        " show existing tab with 2 spaces width
+        set tabstop=2
+        set softtabstop=2
+        " when indenting with '>', use 2 spaces width
+        set shiftwidth=2
         set clipboard=unnamedplus
         inoremap jj <Esc>
       '';
