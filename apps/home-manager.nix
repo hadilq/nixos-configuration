@@ -9,6 +9,8 @@ let
     systemImageTypes = [ "default" ];
     includeNDK = true;
     useGoogleAPIs = true;
+    platformVersions = [ "28" ];
+    abiVersions = [ "x86" "x86_64"];
   };
 in
 {
@@ -79,6 +81,18 @@ in
       enable = true;
       userName = "Hadi";
       userEmail = "hadilashkari@gmail.com";
+      extraConfig = {
+        diff = {
+          tool = "vimdiff";
+          mnemonicprefix = true;
+        };
+        merge = {
+          tool = "vimdiff";
+        };
+        core = {
+          editor = "vim";
+        };
+      };
     };
 
     programs.firefox.enable = false;
