@@ -2,9 +2,8 @@
 
 let
   androidComposition = pkgs.androidenv.composeAndroidPackages {
-    includeEmulator = true;
+ #   includeEmulator = true;
     includeSources = true;
-    includeDocs = true;
     includeSystemImages = true;
     systemImageTypes = [ "default" ];
     includeNDK = true;
@@ -23,6 +22,7 @@ in
     "jdk".source = openjdk8;
     "jdk8".source = openjdk8;
     "jdk11".source = openjdk11;
+    "jdk117".source = openjdk17;
     "android-sdk".source = androidComposition.androidsdk;
   };
 
@@ -103,6 +103,9 @@ in
         vim-flutter
         vim-flatbuffers
         vim-android
+        vim-tmux
+        vim-tmux-clipboard
+        vim-tmux-focus-events
         rust-vim
         vim-ruby
       ];

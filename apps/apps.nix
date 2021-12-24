@@ -10,6 +10,7 @@
     curl
     tmux
     unzip
+    xclip
     aspell
     aspellDicts.en
     aspellDicts.ca
@@ -34,17 +35,16 @@
     libreoffice
     gimp
     yakuake
-    rclone
+    gdrive
     patchelf
     openjdk8
-    openjdk11
+    jdk11
+    jdk17
     android-studio
-    androidStudioPackages.beta
     androidStudioPackages.canary
     jetbrains.idea-community
     jetbrains.pycharm-community
     python38Packages.conda
-    flutterPackages.beta
     flutter
     clang
     rustc
@@ -65,10 +65,6 @@
   };
   programs.zsh.ohMyZsh.enable = true;
 
-  programs.screen.screenrc = ''
-    defscrollback 5000
-  '';
-
   programs.adb.enable = true;
 
   programs.java = {
@@ -76,4 +72,15 @@
   };
 
   environment.variables.ANDROID="/libexec/android-sdk";
+
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set-window-option -g mode-keys vi
+      bind-key -T copy-mode-vi v send -X begin-selection
+      bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
+      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
+      bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
+    '';
+  };
 }

@@ -15,6 +15,7 @@
     device = "nodev";
     efiSupport = true;
     enableCryptodisk = true;
+    configurationLimit = 40;
   };
   boot.initrd.luks.devices = {
       root = {
@@ -28,7 +29,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  time.timeZone = "Europe/Madrid";
+  time.timeZone = "Canada/Eastern";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
