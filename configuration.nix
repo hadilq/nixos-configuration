@@ -2,17 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [
+      <nixos-hardware/common/cpu/amd/pstate.nix>
+      <nixos-hardware/common/pc/laptop>
+      <nixos-hardware/common/pc/ssd>
       ./hardware-configuration.nix
       ./boot.nix
       ./users.nix
       ./apps/apps.nix
       ./apps/virtualisation.nix
-      ./apps/home-manager.nix
     ];
 
   # This value determines the NixOS release from which the default

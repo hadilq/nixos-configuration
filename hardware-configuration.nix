@@ -8,11 +8,6 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" "asus_wmi" "hid_asus" "nouveau" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/3c3fae12-06c9-4e97-b0b6-b7ea81cb8194";
       fsType = "btrfs";
@@ -54,5 +49,18 @@
     [ { device = "/dev/disk/by-uuid/b9e82e4e-12af-4508-aa5d-93e1f4fa784b"; }
     ];
 
+  networking.hostName = "rog"; # Define your hostname.
+  networking.networkmanager.enable = true;
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
+  networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.bumblebee = {
+    enable = true;
+    driver = lib.mkDefault "nouveau";
+  };
 }

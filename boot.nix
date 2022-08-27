@@ -1,42 +1,42 @@
 { config, pkgs, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.supportedFilesystems = [ "btrfs" ];
-  hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub = {
-    enable = true;
-    version = 2;
-    device = "nodev";
-    efiSupport = true;
-    enableCryptodisk = true;
-    configurationLimit = 40;
-  };
-  boot.initrd.luks.devices = {
-      root = {
-        device = "/dev/disk/by-uuid/695f14ba-8421-4eec-b9d4-6a01bcc45357";
-        preLVM = true;
+  hardware.enableAllFirmware = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+    supportedFilesystems = [ "btrfs" ];
+    loader = {
+      # systemd-boot = {
+      #   enable = true;
+      #   configurationLimit = 10;
+      # };
+      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        version = 2;
+        device = "nodev";
+        efiSupport = true;
+        enableCryptodisk = true;
+        configurationLimit = 5;
       };
+    };
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" "asus_wmi" "hid_asus" "nouveau" ];
+      kernelModules = [ "dm-snapshot" ];
+      luks.devices = {
+        root = {
+          device = "/dev/disk/by-uuid/695f14ba-8421-4eec-b9d4-6a01bcc45357";
+          preLVM = true;
+        };
+      };
+    };
   };
-
-  networking.hostName = "rog"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "Canada/Eastern";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp3s0.useDHCP = true;
-  networking.interfaces.wlp2s0.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -55,8 +55,11 @@
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = "eurosign:e";
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.xserver.libinput.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -65,13 +68,10 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = false;
 
   # Open ports in the firewall.
   networking.firewall.allowPing = false;
@@ -86,6 +86,7 @@
     adjtime.source = "/persist/etc/adjtime";
     NIXOS.source = "/persist/etc/NIXOS";
   };
+
   systemd.tmpfiles.rules = [
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
