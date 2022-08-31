@@ -9,44 +9,44 @@
     ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/3c3fae12-06c9-4e97-b0b6-b7ea81cb8194";
+    { device = "/dev/disk/by-uuid/059de49d-2733-4d9c-a29b-780442bb5dd4";
       fsType = "btrfs";
       options = [ "subvol=root" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/3c3fae12-06c9-4e97-b0b6-b7ea81cb8194";
+    { device = "/dev/disk/by-uuid/059de49d-2733-4d9c-a29b-780442bb5dd4";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/3c3fae12-06c9-4e97-b0b6-b7ea81cb8194";
+    { device = "/dev/disk/by-uuid/059de49d-2733-4d9c-a29b-780442bb5dd4";
       fsType = "btrfs";
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/3c3fae12-06c9-4e97-b0b6-b7ea81cb8194";
+    { device = "/dev/disk/by-uuid/059de49d-2733-4d9c-a29b-780442bb5dd4";
       fsType = "btrfs";
       options = [ "subvol=persist" "compress=zstd" "noatime" ];
       neededForBoot = true;
     };
 
   fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/3c3fae12-06c9-4e97-b0b6-b7ea81cb8194";
+    { device = "/dev/disk/by-uuid/059de49d-2733-4d9c-a29b-780442bb5dd4";
       fsType = "btrfs";
       options = [ "subvol=log" "compress=zstd" "noatime" ];
       neededForBoot = true;
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A773-98B5";
+    { device = "/dev/disk/by-uuid/F679-A4E2";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/b9e82e4e-12af-4508-aa5d-93e1f4fa784b"; }
+    [ { device = "/dev/disk/by-uuid/113cd4a9-d67d-4138-a642-622022ecbd06"; }
     ];
 
   networking.hostName = "rog"; # Define your hostname.
@@ -63,4 +63,6 @@
     enable = true;
     driver = lib.mkDefault "nouveau";
   };
+
+  hardware.bluetooth.enable = true;
 }
