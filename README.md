@@ -22,7 +22,7 @@ The `users.nix` is omitted from this repo but its content is something like
         isNormalUser = true;
         home = "/home/hadi";
         description = "Hadi";
-        extraGroups = [ "wheel" "networkmanager" "adbusers" ];
+        extraGroups = [ "wheel" "networkmanager" "adbusers" "libvirtd" ];
         initialHashedPassword = "";
         # hashedPassword ="*****"; // Use `mkpasswd -m sha-512` to generate it. Sometimes you need to turn the `murableUsers` on and off to make it work!
       };
