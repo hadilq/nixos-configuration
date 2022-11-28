@@ -81,6 +81,12 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  security.auditd.enable = true;
+  security.audit.enable = true;
+  security.audit.rules = [
+    "-a exit,always -F arch=b64 -S execve"
+  ];
+
   environment.etc = {
     nixos.source = "/persist/etc/nixos";
     "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
