@@ -13,6 +13,7 @@
       ./hardware-configuration.nix
       ./boot.nix
       ./users.nix
+      ./network.nix
       ./apps/apps.nix
       ./apps/virtualisation.nix
     ];

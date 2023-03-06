@@ -11,7 +11,7 @@ $ nix-channel --update
 ```
 
 The `users.nix` is omitted from this repo but its content is something like
-```
+```nix
 { config, pkgs, ... }:
 
 {
@@ -22,15 +22,40 @@ The `users.nix` is omitted from this repo but its content is something like
         isNormalUser = true;
         home = "/home/hadi";
         description = "Hadi";
-        extraGroups = [ "wheel" "networkmanager" "adbusers" "libvirtd" ];
+        extraGroups = [ "wheel" "networkmanager" "adbusers" "libvirtd" "docker" ];
         initialHashedPassword = "";
-        # hashedPassword ="*****"; // Use `mkpasswd -m sha-512` to generate it. Sometimes you need to turn the `murableUsers` on and off to make it work!
+        # hashedPassword ="*****"; // Use `mkpasswd -m sha-512` to generate it. Sometimes you need to turn the `mutableUsers` on and off to make it work!
+        openssh.authorizedKeys.keys = [
+          "ssh-rsa AAAAB3Nz....6OWM= user"
+          # note: ssh-copy-id will add user@clientmachine after the public key
+          # but we can remove the "@clientmachine" part
+        ];
       };
 
       root = {
         home = "/root";
       };
     };
+  };
+}
+```
+
+Also the `network.nix` is ommited too.
+```nix
+{ config, pkgs, ...}:
+{
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = false;
+    passwordAuthentication = false;
+    kbdInteractiveAuthentication = false;
+  }
+
+  # Open ports in the firewall.
+  networking.firewall = {
+    allowPing = false;
+    allowedTCPPorts = [];
+    allowedUDPPorts = [];
   };
 }
 ```

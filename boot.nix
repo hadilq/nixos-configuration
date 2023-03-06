@@ -69,18 +69,6 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = false;
-
-  # Open ports in the firewall.
-  networking.firewall.allowPing = false;
-  networking.firewall.allowedTCPPorts = [];
-  networking.firewall.allowedUDPPorts = [];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   security.auditd.enable = true;
   security.audit.enable = true;
   security.audit.rules = [
