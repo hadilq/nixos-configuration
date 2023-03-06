@@ -86,7 +86,7 @@
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
     # "L /var/lib/lxd - - - - /persist/var/lib/lxd"
-    # "L /var/lib/docker - - - - /persist/var/lib/docker"
+    "L /var/lib/docker - - - - /persist/var/lib/docker"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot
