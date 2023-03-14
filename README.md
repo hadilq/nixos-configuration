@@ -49,13 +49,24 @@ Also the `network.nix` is ommited too.
     enable = false;
     passwordAuthentication = false;
     kbdInteractiveAuthentication = false;
+    listenAddresses = [
+      {
+        addr = "192.168.1.1";
+        port = 123;
+      }
+    ];
   }
 
-  # Open ports in the firewall.
-  networking.firewall = {
-    allowPing = false;
-    allowedTCPPorts = [];
-    allowedUDPPorts = [];
+  networking = {
+    firewall = {
+      allowPing = false;
+      allowedTCPPorts = [];
+      allowedUDPPorts = [];
+    };
+    interfaces.wlp2s0.ipv4.addresses = [{
+      address = "192.168.1.1";
+      prefixLength = 28;
+    }];
   };
 }
 ```
