@@ -4,7 +4,7 @@ My NixOS configuration after installing it like [this](https://gist.github.com/h
 
 You need to add the channels first.
 ```
-$ nix-channel --add https://nixos.org/channels/nixos-22.05 nixos
+$ nix-channel --add https://nixos.org/channels/nixos-23.05 nixos
 $ nix-channel --add https://github.com/NixOS/nixos-hardware/archive/master.tar.gz nixos-hardware
 
 $ nix-channel --update
@@ -43,16 +43,22 @@ The `users.nix` is omitted from this repo but its content is something like
 Also the `network.nix` is ommited too.
 ```nix
 { config, pkgs, ...}:
+let
+  address = "192.168.1.1";
+  port = 123;
+in
 {
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = false;
-    passwordAuthentication = false;
-    kbdInteractiveAuthentication = false;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
     listenAddresses = [
       {
-        addr = "192.168.1.1";
-        port = 123;
+        addr = address;
+        port = port;
       }
     ];
   }
@@ -64,7 +70,7 @@ Also the `network.nix` is ommited too.
       allowedUDPPorts = [];
     };
     interfaces.wlp2s0.ipv4.addresses = [{
-      address = "192.168.1.1";
+      address = address;
       prefixLength = 28;
     }];
   };
