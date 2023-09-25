@@ -1,6 +1,6 @@
 # NixOS configuration
 
-My NixOS configuration after installing it like [this](https://gist.github.com/hadilq/a491ca53076f38201a8aa48a0c6afef5).
+My NixOS configuration after installing it like [this](https://gist.github.com/hadilq/f12f5378b74f1bdd440144373dfc5687).
 
 You need to add the channels first.
 ```
