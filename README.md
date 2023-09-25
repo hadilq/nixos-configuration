@@ -30,6 +30,7 @@ The `users.nix` is omitted from this repo but its content is something like
           # note: ssh-copy-id will add user@clientmachine after the public key
           # but we can remove the "@clientmachine" part
         ];
+        shell = pkgs.zsh;
       };
 
       root = {
@@ -69,7 +70,7 @@ in
       allowedTCPPorts = [];
       allowedUDPPorts = [];
     };
-    interfaces.wlp2s0.ipv4.addresses = [{
+    interfaces.wlp0s20f3.ipv4.addresses = [{
       address = address;
       prefixLength = 28;
     }];
