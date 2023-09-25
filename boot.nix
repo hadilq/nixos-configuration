@@ -23,11 +23,11 @@
       };
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" "asus_wmi" "hid_asus" "nouveau" ];
+      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
       kernelModules = [ "dm-snapshot" ];
       luks.devices = {
         root = {
-          device = "/dev/disk/by-uuid/14fd8688-c7f6-4831-b82d-90a02acf4f12";
+          device = "/dev/disk/by-uuid/b100697a-2d7d-436b-90ac-00f71bb55a1e";
           preLVM = true;
         };
       };
@@ -48,18 +48,47 @@
     keyMap = "us";
   };
 
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # Enable the GNOME Desktop Environment.
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    displayManager.defaultSession = "gnome";
+  };
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    xterm
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    gnome-music
+    gnome-terminal
+    gedit # text editor
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    gnome-characters
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+    yelp # Help view
+    gnome-contacts
+  ]);
 
   # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver = {
+    layout = "us";
+    xkbOptions = "eng";
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.touchpad.naturalScrolling = true;
+  services.xserver = {
+    libinput.enable = true;
+    libinput.touchpad.naturalScrolling = true;
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -84,8 +113,8 @@
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
-    # "L /var/lib/lxd - - - - /persist/var/lib/lxd"
     "L /var/lib/docker - - - - /persist/var/lib/docker"
+    "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot
@@ -98,7 +127,7 @@
 
     # We first mount the btrfs root to /mnt
     # so we can manipulate btrfs subvolumes.
-    mount -o subvol=/ /dev/mapper/enc /mnt
+    mount -o subvol=/ /dev/mapper/lvm-root /mnt
 
     # While we're tempted to just delete /root and create
     # a new snapshot from /root-blank, /root is already

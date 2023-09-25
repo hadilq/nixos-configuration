@@ -19,9 +19,12 @@
     mkpasswd
     zsh
     oh-my-zsh
-    screen
     clang
+    gnome.gnome-tweaks
   ];
+
+  # GNOME Desktop dconf
+  programs.dconf.enable = true;
 
   programs.adb.enable = true;
 
@@ -36,7 +39,6 @@
     histFile = "$HOME/.zsh_history";
     histSize = 2000;
   };
-  programs.zsh.ohMyZsh.enable = true;
 
   programs.tmux = {
     enable = true;

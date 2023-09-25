@@ -7,9 +7,7 @@
 {
   imports =
     [
-      <nixos-hardware/common/cpu/amd/pstate.nix>
-      <nixos-hardware/common/pc/laptop>
-      <nixos-hardware/common/pc/ssd>
+      ./darp9/default.nix
       ./hardware-configuration.nix
       ./boot.nix
       ./users.nix
