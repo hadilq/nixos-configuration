@@ -94,9 +94,7 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  security.rtkit.enable = true;
 
   security.auditd.enable = true;
   security.audit.enable = true;
@@ -115,7 +113,8 @@
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
     "L /var/lib/docker - - - - /persist/var/lib/docker"
-    "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
+    "L /var/lib/libvirt/nwfilter - - - - /persist/var/lib/libvirt/nwfilter"
+    "L /var/lib/libvirt/qemu - - - - /persist/var/lib/libvirt/qemu"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot

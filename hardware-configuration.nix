@@ -51,7 +51,6 @@
 
   networking.hostName = "darter"; # Define your hostname.
   networking.networkmanager.enable = true;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   networking.interfaces.enp36s0.useDHCP = lib.mkDefault true;
   networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;

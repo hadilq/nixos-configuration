@@ -1,7 +1,11 @@
+{ pkgs, ... }:
 {
   virtualisation = {
     virtualbox.host.enable = true;
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu.swtpm.enable = true;
+    };
     docker = {
       enable = true;
       storageDriver = "btrfs";
