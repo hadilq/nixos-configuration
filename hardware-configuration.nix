@@ -60,11 +60,6 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.bluetooth.enable = true;
-  hardware.system76.enableAll = lib.mkDefault true;
-  hardware.system76.darp9.soundVendorId = "0x10ec0256";
-  hardware.system76.darp9.soundSubsystemId = "0x155851b1";
-
   # Accelerated Video Playback
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
