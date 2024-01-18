@@ -10,10 +10,6 @@
     extraModulePackages = [ ];
     supportedFilesystems = [ "btrfs" ];
     loader = {
-      # systemd-boot = {
-      #   enable = true;
-      #   configurationLimit = 10;
-      # };
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
@@ -104,8 +100,8 @@
 
   environment.etc = {
     nixos.source = "/persist/etc/nixos";
-    "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
     NIXOS.source = "/persist/etc/NIXOS";
+    "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
   };
 
   systemd.tmpfiles.rules = [
@@ -113,8 +109,16 @@
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
     "L /var/lib/docker - - - - /persist/var/lib/docker"
-    "L /var/lib/libvirt/nwfilter - - - - /persist/var/lib/libvirt/nwfilter"
-    "L /var/lib/libvirt/qemu - - - - /persist/var/lib/libvirt/qemu"
+    "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
+    "L /var/lib/nixos - - - - /persist/var/lib/nixos"
+    "L /var/lib/upower - - - - /persist/var/lib/upower"
+    # "L /var/lib/colord - - - - /persist/var/lib/colord"
+    "L /var/lib/boltd - - - - /persist/var/lib/boltd"
+    "L /var/lib/AccountsService - - - - /persist/var/lib/AccountsService"
+    "L /var/lib/systemd/rfkill - - - - /persist/var/lib/rfkill"
+    "L /var/lib/systemd/random-seed - - - - /persist/var/lib/random-seed"
+    "L /var/db/dhcpcd - - - - /persist/var/db/dhcpcd"
+    "L /root/.nix-channels - - - - /persist/root/.nix-channels"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot
