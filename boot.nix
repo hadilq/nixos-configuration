@@ -91,6 +91,7 @@
   # services.printing.enable = true;
 
   security.rtkit.enable = true;
+  security.apparmor.enable = true;
 
   security.auditd.enable = true;
   security.audit.enable = true;

@@ -13,7 +13,20 @@ $ nix-channel --update
 The `users.nix` is omitted from this repo but its content is something like
 ```nix
 { config, pkgs, ... }:
-
+let
+  serviceConfig = {
+    MountAPIVFS = true;
+    PrivateTmp = true;
+    PrivateUsers = true;
+    ProtectKernelModules = true;
+    PrivateDevices = true;
+    ProtectControlGroups = true;
+    ProtectHome = true;
+    ProtectKernelTunables = true;
+    ProtectSystem = "full";
+    RestrictSUIDSGID = true;
+  };
+in
 {
   users = {
     mutableUsers = true;
@@ -38,6 +51,9 @@ The `users.nix` is omitted from this repo but its content is something like
       };
     };
   };
+
+  systemd.services.hadi.serviceConfig = serviceConfig;
+  systemd.services.root.serviceConfig = serviceConfig;
 }
 ```
 
