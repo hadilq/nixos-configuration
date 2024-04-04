@@ -8,17 +8,14 @@
     tree
     gnupg
     curl
-    tmux
     unzip
     bat
     file
     xclip
-    vim_configurable
+    vim
     git
     openssl
     mkpasswd
-    zsh
-    oh-my-zsh
     clang
     gnome.gnome-tweaks
   ];
@@ -44,10 +41,11 @@
     enable = true;
     extraConfig = ''
       set-window-option -g mode-keys vi
+      bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
+
       bind-key -T copy-mode-vi v send -X begin-selection
       bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
       bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
-      bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
     '';
   };
 }

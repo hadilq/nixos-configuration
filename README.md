@@ -33,9 +33,17 @@ in
     users = {
       hadi = {
         isNormalUser = true;
+        uid = 1000;
+        subUidRanges = [
+          { startUid = 100000; count = 65536; }
+        ];
+        subGidRanges = [
+          { startGid = 100000; count = 65536; }
+        ];
+        group = "hadi";
         home = "/home/hadi";
         description = "Hadi";
-        extraGroups = [ "wheel" "networkmanager" "adbusers" "libvirtd" "docker" "kvm" "qemu-libvirtd" ];
+        extraGroups = [ "wheel" "networkmanager" "adbusers" "libvirtd" "docker" "kvm" "qemu-libvirtd" "hadi-root" "hadi-dev" ];
         initialHashedPassword = "";
         # hashedPassword ="*****"; // Use `mkpasswd -m sha-512` to generate it. Sometimes you need to turn the `mutableUsers` on and off to make it work!
         openssh.authorizedKeys.keys = [
@@ -48,6 +56,32 @@ in
 
       root = {
         home = "/root";
+      };
+
+      # docker users
+      hadi-root = {
+        isSystemUser = true;
+        uid = 100000;
+        group = "hadi-root";
+        extraGroups = [ ];
+      };
+      hadi-dev = {
+        isSystemUser = true;
+        uid = 101000;
+        group = "hadi-dev";
+        extraGroups = [ ];
+      };
+    };
+
+    groups = {
+      hadi = {
+        gid = 1000;
+      };
+      hadi-root = {
+        gid = 100000;
+      };
+      hadi-dev = {
+        gid = 101000;
       };
     };
   };
