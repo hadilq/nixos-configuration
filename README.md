@@ -60,13 +60,15 @@ in
 
       # docker users
       hadi-root = {
-        isSystemUser = true;
+        isNormalUser = true;
+        createHome = false;
         uid = 100000;
         group = "hadi-root";
         extraGroups = [ ];
       };
       hadi-dev = {
-        isSystemUser = true;
+        isNormalUser = true;
+        createHome = false;
         uid = 101000;
         group = "hadi-dev";
         extraGroups = [ ];
