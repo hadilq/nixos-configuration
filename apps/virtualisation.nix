@@ -13,9 +13,6 @@
         enable = true;
         setSocketVariable = true;
       };
-      daemon.settings = {
-        userns-remap="hadi";
-      };
     };
 
     podman = {
