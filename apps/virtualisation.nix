@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   virtualisation = {
-    virtualbox.host.enable = true;
+    # virtualbox.host.enable = true;
     libvirtd = {
       enable = true;
       qemu.swtpm.enable = true;

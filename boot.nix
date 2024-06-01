@@ -46,10 +46,13 @@
   };
 
   # Enable the GNOME Desktop Environment.
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
+
     displayManager.defaultSession = "gnome";
   };
 
@@ -61,7 +64,6 @@
     cheese # webcam tool
     gnome-music
     gnome-terminal
-    gedit # text editor
     epiphany # web browser
     geary # email reader
     evince # document viewer
@@ -76,15 +78,15 @@
   ]);
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbOptions = "eng";
+    options = "eng";
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver = {
-    libinput.enable = true;
-    libinput.touchpad.naturalScrolling = true;
+  services.libinput = {
+    enable = true;
+    touchpad.naturalScrolling = true;
   };
 
   # Enable CUPS to print documents.
