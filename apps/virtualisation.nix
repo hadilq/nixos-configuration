@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   virtualisation = {
-    # virtualbox.host.enable = true;
     libvirtd = {
       enable = true;
       qemu.swtpm.enable = true;
@@ -24,10 +23,5 @@
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
     };
-
-    #lxd = {
-    #  enable = true;
-    #  recommendedSysctlSettings = true;
-    #};
   };
 }
