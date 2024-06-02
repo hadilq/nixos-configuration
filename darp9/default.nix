@@ -1,11 +1,5 @@
 { lib, pkgs, ... }:
 {
-  imports = [
-    <nixos-hardware/common/pc>
-    <nixos-hardware/common/pc/laptop>
-    <nixos-hardware/common/pc/laptop/ssd>
-  ];
-
   hardware.bluetooth.enable = true;
   hardware.system76.enableAll = lib.mkDefault true;
 

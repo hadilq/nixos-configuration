@@ -19,7 +19,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.gcr;
+    pinentryPackage = pkgs.pinentry-tty;
   };
 
   programs.zsh = {

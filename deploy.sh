@@ -5,15 +5,20 @@ if ! [[ -z "$(git status -s)" ]]; then
   exit 1;
 fi
 
-CONFIGURATION_FILE="configuration.tar.gz"
-# OUTPUT_DIR=$(mktemp -d /tmp/nixos-configuration-XXXX)
+ORIGIN=$PWD
+ORIGIN_COMMIT=`git show --format="%H" --no-patch`
+#OUTPUT_DIR=$(mktemp -d /tmp/nixos-configuration-XXXX)
 OUTPUT_DIR=/persist/etc/nixos
 echo "output dir: $OUTPUT_DIR" >&2
 
-git archive --format=tar.gz -o $CONFIGURATION_FILE main
+cd $OUTPUT_DIR
+if [ ! -d "$OUTPUT_DIR/.git" ]; then
+  sudo rm -rf $OUTPUT_DIR
+  sudo git clone $ORIGIN $OUTPUT_DIR
+fi
 
-sudo tar -xf $CONFIGURATION_FILE --directory $OUTPUT_DIR
-sudo chown -R root:root $OUTPUT_DIR
-sudo chmod -R 750 $OUTPUT_DIR
+sudo git fetch -a
+sudo git checkout -f $ORIGIN_COMMIT
+
 sudo nixos-rebuild switch
 
