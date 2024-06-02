@@ -10,7 +10,6 @@
     file
     xclip
     vim
-    git
     openssl
     mkpasswd
     clang
@@ -26,5 +25,9 @@
     enable = true;
     histFile = "$HOME/.zsh_history";
     histSize = 2000;
+  };
+
+  programs.git = {
+    enable = true;
   };
 }

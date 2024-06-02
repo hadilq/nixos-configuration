@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-  hardware.enableAllFirmware = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   hardware.system76.kernel-modules.enable = true;
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
