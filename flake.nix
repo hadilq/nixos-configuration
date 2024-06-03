@@ -6,7 +6,7 @@
     nixosConfigurations.darter = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = attrs;
-      modules = builtins.trace (nixos-hardware.nixosModules) [
+      modules = [
         ./configuration.nix
         nixos-hardware.nixosModules.common-pc
         nixos-hardware.nixosModules.common-pc-laptop
