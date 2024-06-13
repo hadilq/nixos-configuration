@@ -33,32 +33,10 @@
   # Set your time zone.
   time.timeZone = "Canada/Eastern";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
-  };
-
-  # Enable the GNOME Desktop Environment.
-  services = {
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-    };
-
-    displayManager.defaultSession = "gnome";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    options = "eng";
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -67,17 +45,22 @@
     touchpad.naturalScrolling = true;
   };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    options = "eng";
+  };
 
-  security.rtkit.enable = true;
-  security.apparmor.enable = true;
+  security = {
+    rtkit.enable = true;
+    apparmor.enable = true;
 
-  security.auditd.enable = true;
-  security.audit.enable = true;
-  security.audit.rules = [
-    "-a exit,always -F arch=b64 -S execve"
-  ];
+    auditd.enable = true;
+    audit.enable = true;
+    audit.rules = [
+      "-a exit,always -F arch=b64 -S execve"
+    ];
+  };
 
   environment.etc = {
     nixos.source = "/persist/etc/nixos";
