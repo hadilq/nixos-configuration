@@ -14,7 +14,7 @@
       ./network.nix
       ./apps/apps.nix
       ./apps/virtualisation.nix
-    ] ++ (if cosmic-enabled then [ ./cosmic.nix ] else [ ./gnome.nix ] );
+    ] ++ (if cosmic-enabled then [ ./cosmic.nix ] else [ ./gnome.nix ./hyprland.nix ] );
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

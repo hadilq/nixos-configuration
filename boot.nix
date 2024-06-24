@@ -52,6 +52,7 @@
   };
 
   security = {
+    # PipeWire dependency
     rtkit.enable = true;
     apparmor.enable = true;
 
