@@ -13,6 +13,8 @@
     openssl
     mkpasswd
     clang
+    # Not needed when virtualisation.docker.enable = true;
+    docker-client
   ];
 
   programs.gnupg.agent = {
