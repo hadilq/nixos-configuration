@@ -1,18 +1,15 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.follows = "nixos-cosmic/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, nixos-hardware, nixos-cosmic, ... }@attrs:
+  outputs = { self, nixpkgs, nixos-hardware, nixos-cosmic, ... }@attrs:
   let
-    cosmic-enabled = false;
-    nixpkgs = if cosmic-enabled then nixpkgs-unstable else nixpkgs-stable;
+    cosmic-enabled = true;
     cosmic-modules = [
       {
         nix.settings = {
