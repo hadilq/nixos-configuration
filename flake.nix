@@ -1,15 +1,13 @@
 {
   inputs = {
-    nixpkgs.follows = "nixos-cosmic/nixpkgs";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
     };
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, nixos-cosmic, ... }@attrs:
+  outputs = { self, nixpkgs, nixos-cosmic, ... }@attrs:
   let
-    cosmic-enabled = true;
     cosmic-modules = [
       {
         nix.settings = {
@@ -23,13 +21,10 @@
   {
     nixosConfigurations.darter = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = attrs // { inherit cosmic-enabled; };
+      specialArgs = attrs;
       modules = [
         ./configuration.nix
-        nixos-hardware.nixosModules.common-pc
-        nixos-hardware.nixosModules.common-pc-laptop
-        nixos-hardware.nixosModules.common-pc-laptop-ssd
-      ] ++ nixpkgs.lib.optionals cosmic-enabled cosmic-modules;
+      ] ++ cosmic-modules;
     };
   };
 }

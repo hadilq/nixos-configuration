@@ -2,19 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, cosmic-enabled, ... }:
+{ ... }:
 
 {
   imports =
     [
-      ./darp9/default.nix
       ./hardware-configuration.nix
       ./boot.nix
       ./users.nix
       ./network.nix
       ./apps/apps.nix
       ./apps/virtualisation.nix
-    ] ++ (if cosmic-enabled then [ ./cosmic.nix ] else [ ./gnome.nix ./hyprland.nix ] );
+      ./cosmic.nix
+    ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

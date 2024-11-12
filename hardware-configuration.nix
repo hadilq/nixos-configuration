@@ -49,6 +49,9 @@
     [ { device = "/dev/disk/by-uuid/61c80561-8301-4952-b124-278544929d02"; }
     ];
 
+  hardware.system76.enableAll = true;
+  hardware.system76.kernel-modules.enable = true;
+
   networking.hostName = "darter"; # Define your hostname.
   networking.networkmanager.enable = true;
 

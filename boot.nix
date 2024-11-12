@@ -2,7 +2,6 @@
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  hardware.system76.kernel-modules.enable = true;
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "kvm-intel" ];
@@ -19,8 +18,6 @@
       };
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
-      kernelModules = [ "dm-snapshot" ];
       luks.devices = {
         root = {
           device = "/dev/disk/by-uuid/b100697a-2d7d-436b-90ac-00f71bb55a1e";
