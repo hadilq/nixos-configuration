@@ -13,8 +13,7 @@
     openssl
     mkpasswd
     clang
-    # Not needed when virtualisation.docker.enable = true;
-    docker-client
+    signaldctl
   ];
 
   programs.gnupg.agent = {
@@ -31,5 +30,11 @@
 
   programs.git = {
     enable = true;
+  };
+
+  # Signal
+  services.signald = {
+    enable = true;
+    user = "Hadi";
   };
 }
