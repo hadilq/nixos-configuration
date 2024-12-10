@@ -1,6 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=4637bf5b68943c5d694fdbd20652d496997f088d";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
     };
