@@ -64,6 +64,8 @@
     nixos.source = "/persist/etc/nixos";
     NIXOS.source = "/persist/etc/NIXOS";
     "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
+    "machine-id".source = "/persist/etc/machine-id";
+    "resolv.conf".source = "/persist/etc/resolv.conf";
   };
 
   systemd.tmpfiles.rules = [
@@ -81,9 +83,11 @@
     "L /var/lib/systemd/random-seed - - - - /persist/var/lib/systemd/random-seed"
     "L /var/lib/systemd/catalog/database  - - - - /persist/var/lib/systemd/catalog/database"
     "L /var/lib/systemd/backlight - - - - /persist/var/lib/systemd/backlight"
+    "L /var/lib/cosmic-greeter - - - - /persist/var/lib/cosmic-greeter"
     "L /var/db/dhcpcd - - - - /persist/var/db/dhcpcd"
     "L /root/.nix-channels - - - - /persist/root/.nix-channels"
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
+    "L /var/lib/signald - - - - /persist/var/lib/signald"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot
