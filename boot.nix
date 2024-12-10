@@ -87,7 +87,6 @@
     "L /var/db/dhcpcd - - - - /persist/var/db/dhcpcd"
     "L /root/.nix-channels - - - - /persist/root/.nix-channels"
     "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
-    "L /var/lib/signald - - - - /persist/var/lib/signald"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot

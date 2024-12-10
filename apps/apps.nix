@@ -13,7 +13,6 @@
     openssl
     mkpasswd
     clang
-    signaldctl
   ];
 
   programs.gnupg.agent = {
@@ -30,11 +29,5 @@
 
   programs.git = {
     enable = true;
-  };
-
-  # Signal
-  services.signald = {
-    enable = true;
-    user = "hadi";
   };
 }
