@@ -35,6 +35,6 @@
   # Signal
   services.signald = {
     enable = true;
-    user = "Hadi";
+    user = "hadi";
   };
 }
