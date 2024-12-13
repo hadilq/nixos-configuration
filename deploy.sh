@@ -9,7 +9,10 @@ ORIGIN=$PWD
 ORIGIN_COMMIT=`git show --format="%H" --no-patch`
 #OUTPUT_DIR=$(mktemp -d /tmp/nixos-configuration-XXXX)
 OUTPUT_DIR=/persist/etc/nixos
-echo "output dir: $OUTPUT_DIR" >&2
+# Since I continuously delete its directory!
+BACKUP_DIR=/persist/etc/nixos-back
+echo "output directory: $OUTPUT_DIR" >&2
+echo "backup directory: $OUTPUT_DIR" >&2
 
 LOCAL_CHANGES_BRANCH=local-users-network
 cd $OUTPUT_DIR
@@ -31,6 +34,9 @@ sudo git branch -D $LOCAL_CHANGES_BRANCH
 sudo git checkout -b $LOCAL_CHANGES_BRANCH # creating this branch on the HEAD of main now
 sudo git clean -fdx
 sudo git cherry-pick $LOCAL_COMMIT
+
+sudo rm -rf $BACKUP_DIR
+sudo cp -a $OUTPUT_DIR $BACKUP_DIR
 
 sudo nixos-rebuild switch
 
