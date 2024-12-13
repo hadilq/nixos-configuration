@@ -8,6 +8,7 @@
     extraModulePackages = [ ];
     supportedFilesystems = [ "btrfs" ];
     loader = {
+      systemd-boot.enable = false;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
