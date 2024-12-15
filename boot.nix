@@ -49,6 +49,9 @@
     options = "eng";
   };
 
+  # virtual pdf printer backend. FYI, check /var/spool/cups-pdf-pdf/users/${USER} for the PDFs.
+  services.printing.cups-pdf.enable = true;
+
   security = {
     # PipeWire dependency
     rtkit.enable = true;
