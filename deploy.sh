@@ -12,7 +12,7 @@ OUTPUT_DIR=/persist/etc/nixos
 # Since I continuously delete its directory!
 BACKUP_DIR=/persist/etc/nixos-back
 echo "output directory: $OUTPUT_DIR" >&2
-echo "backup directory: $OUTPUT_DIR" >&2
+echo "backup directory: $BACKUP_DIR" >&2
 
 LOCAL_CHANGES_BRANCH=local-users-network
 cd $OUTPUT_DIR
