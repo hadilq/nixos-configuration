@@ -27,6 +27,9 @@ fi
 LOCAL_COMMIT=`sudo git show --format="%H" --no-patch`
 echo "local commit is $LOCAL_COMMIT" >&2
 
+sudo rm flake.lock
+sudo git config --global user.email "hadilq.dev@gmail.com"
+sudo git config --global user.name "Hadi"
 sudo git branch -D main
 sudo git fetch -a
 sudo git checkout -f main # In case of `commit --ammend` this works, but not `pull --rebase`
