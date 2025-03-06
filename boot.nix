@@ -3,18 +3,15 @@
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    kernelParams = [ "quiet" ];
+    plymouth.enable = true;
     supportedFilesystems = [ "btrfs" ];
     loader = {
-      systemd-boot.enable = false;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
         device = "nodev";
         efiSupport = true;
-        enableCryptodisk = true;
         configurationLimit = 40;
       };
     };
@@ -22,7 +19,6 @@
       luks.devices = {
         root = {
           device = "/dev/disk/by-uuid/b100697a-2d7d-436b-90ac-00f71bb55a1e";
-          preLVM = true;
         };
       };
     };
