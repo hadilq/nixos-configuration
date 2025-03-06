@@ -14,17 +14,19 @@ BACKUP_DIR=/persist/etc/nixos-back
 echo "output directory: $OUTPUT_DIR" >&2
 echo "backup directory: $BACKUP_DIR" >&2
 
-LOCAL_CHANGES_BRANCH=local-users-network
+LOCAL_CHANGES_BRANCH=main
+mkdir -p $OUTPUT_DIR
 cd $OUTPUT_DIR
 if [ ! -d "$OUTPUT_DIR/.git" ]; then
+  cd ..
   sudo rm -rf $OUTPUT_DIR
   sudo git clone $ORIGIN $OUTPUT_DIR
+  cd $OUTPUT_DIR
   sudo git checkout -b $LOCAL_CHANGES_BRANCH
 fi
 
-sudo rm flake.lock
-sudo git config --global user.email "hadilq.dev@gmail.com"
-sudo git config --global user.name "Hadi"
+sudo git fetch -a
+sudo git checkout -f $LOCAL_CHANGES_BRANCH
 sudo git pull --rebase origin $LOCAL_CHANGES_BRANCH
 
 sudo rm -rf $BACKUP_DIR
