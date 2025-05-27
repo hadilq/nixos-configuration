@@ -60,33 +60,40 @@
     ];
   };
 
+  services.pipewire = {
+    enable = true; # if not already enabled
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   environment.etc = {
     nixos.source = "/persist/etc/nixos";
     NIXOS.source = "/persist/etc/NIXOS";
     "NetworkManager/system-connections".source = "/persist/etc/NetworkManager/system-connections";
     "machine-id".source = "/persist/etc/machine-id";
-    "resolv.conf".source = "/persist/etc/resolv.conf";
+    #"resolv.conf".source = "/persist/etc/resolv.conf";
   };
 
   systemd.tmpfiles.rules = [
-    "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
-    "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
-    "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
-    "L /var/lib/docker - - - - /persist/var/lib/docker"
-    "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
-    "L /var/lib/nixos - - - - /persist/var/lib/nixos"
-    "L /var/lib/upower - - - - /persist/var/lib/upower"
-    #"L /var/lib/colord - - - - /persist/var/lib/colord"
-    "L /var/lib/boltd - - - - /persist/var/lib/boltd"
-    "L /var/lib/AccountsService - - - - /persist/var/lib/AccountsService"
-    "L /var/lib/systemd/rfkill - - - - /persist/var/lib/systemd/rfkill"
-    "L /var/lib/systemd/random-seed - - - - /persist/var/lib/systemd/random-seed"
-    "L /var/lib/systemd/catalog/database  - - - - /persist/var/lib/systemd/catalog/database"
-    "L /var/lib/systemd/backlight - - - - /persist/var/lib/systemd/backlight"
-    "L /var/lib/cosmic-greeter - - - - /persist/var/lib/cosmic-greeter"
-    "L /var/db/dhcpcd - - - - /persist/var/db/dhcpcd"
-    "L /root/.nix-channels - - - - /persist/root/.nix-channels"
-    "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
+    #"L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
+    #"L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
+    #"L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
+    #"L /var/lib/docker - - - - /persist/var/lib/docker"
+    ##"L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
+    #"L /var/lib/nixos - - - - /persist/var/lib/nixos"
+    #"L /var/lib/upower - - - - /persist/var/lib/upower"
+    ##"L /var/lib/colord - - - - /persist/var/lib/colord"
+    #"L /var/lib/boltd - - - - /persist/var/lib/boltd"
+    ##"L /var/lib/AccountsService - - - - /persist/var/lib/AccountsService"
+    #"L /var/lib/systemd/rfkill - - - - /persist/var/lib/systemd/rfkill"
+    #"L /var/lib/systemd/random-seed - - - - /persist/var/lib/systemd/random-seed"
+    #"L /var/lib/systemd/catalog/database  - - - - /persist/var/lib/systemd/catalog/database"
+    #"L /var/lib/systemd/backlight - - - - /persist/var/lib/systemd/backlight"
+    ##"L /var/lib/cosmic-greeter - - - - /persist/var/lib/cosmic-greeter"
+    #"L /var/db/dhcpcd - - - - /persist/var/db/dhcpcd"
+    #"L /root/.nix-channels - - - - /persist/root/.nix-channels"
+    ##"L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
   ];
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot

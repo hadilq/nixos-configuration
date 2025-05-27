@@ -4,9 +4,13 @@
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
     };
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixos-cosmic, ... }@attrs:
+  outputs = { self, nixpkgs, nixos-cosmic, microvm, ... }@attrs:
   let
     cosmic-modules = [
       {
@@ -23,6 +27,7 @@
       system = "x86_64-linux";
       specialArgs = attrs;
       modules = [
+        microvm.nixosModules.host
         ./configuration.nix
       ] ++ cosmic-modules;
     };
