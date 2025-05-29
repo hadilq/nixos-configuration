@@ -76,7 +76,7 @@
     "L /var/lib/libvirt - - - - /persist/var/lib/libvirt"
     "L /var/lib/nixos - - - - /persist/var/lib/nixos"
     "L /var/lib/upower - - - - /persist/var/lib/upower"
-    "L /var/lib/colord - - - - /persist/var/lib/colord"
+    #"L /var/lib/colord - - - - /persist/var/lib/colord"
     "L /var/lib/boltd - - - - /persist/var/lib/boltd"
     "L /var/lib/AccountsService - - - - /persist/var/lib/AccountsService"
     "L /var/lib/systemd/rfkill - - - - /persist/var/lib/systemd/rfkill"
