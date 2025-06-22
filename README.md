@@ -46,6 +46,7 @@ in
         extraGroups = [ "wheel" "networkmanager" "adbusers" "libvirtd" "podman" "kvm" "qemu-libvirtd" "video" ];
         initialHashedPassword = "";
         # hashedPassword ="*****"; // Use `mkpasswd -m sha-512` to generate it. Sometimes you need to turn the `mutableUsers` on and off to make it work!
+        # to verify the hash observe that hash has $6$salt$HASH structure where you can run `mkpasswd -m sha-512 -S salt` to check the HASH
         openssh.authorizedKeys.keys = [
           "ssh-rsa AAAAB3Nz....6OWM= user"
           # note: ssh-copy-id will add user@clientmachine after the public key
