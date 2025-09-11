@@ -1,8 +1,10 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.11.1";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     microvm = {
       url = "github:astro/microvm.nix";
@@ -10,7 +12,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-cosmic, microvm, ... }@attrs:
+  outputs = { self, determinate, nixpkgs, nixos-cosmic, microvm, ... }@attrs:
   let
     cosmic-modules = [
       {
@@ -27,6 +29,7 @@
       system = "x86_64-linux";
       specialArgs = attrs;
       modules = [
+        determinate.nixosModules.default
         microvm.nixosModules.host
         ./configuration.nix
       ] ++ cosmic-modules;
