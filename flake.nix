@@ -1,10 +1,9 @@
 {
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.11.1";
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+    nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     microvm = {
       url = "github:astro/microvm.nix";
