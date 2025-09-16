@@ -11,6 +11,7 @@
       ./boot.nix
       ./users.nix
       ./network.nix
+      ./microvm.nix
       ./apps/apps.nix
       ./apps/virtualisation.nix
       ./cosmic.nix
