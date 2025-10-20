@@ -2,13 +2,11 @@
 
 My NixOS configuration after installing it like [this](https://gist.github.com/hadilq/f12f5378b74f1bdd440144373dfc5687).
 
-You need to add the channels first.
+You need to adjust the `hardware-configuration.nix` file according to the generated one after running
 ```
-$ nix-channel --add https://nixos.org/channels/nixos-23.05 nixos
-$ nix-channel --add https://github.com/NixOS/nixos-hardware/archive/master.tar.gz nixos-hardware
-
-$ nix-channel --update
+nixos-generate-config --root /mnt
 ```
+in the above guide.
 
 The `users.nix` is omitted from this repo but its content is something like
 ```nix
@@ -45,13 +43,14 @@ in
         description = "Hadi";
         extraGroups = [ "wheel" "networkmanager" "adbusers" "libvirtd" "podman" "kvm" "qemu-libvirtd" "video" ];
         initialHashedPassword = "";
-        # hashedPassword ="*****"; // Use `mkpasswd -m sha-512` to generate it. Sometimes you need to turn the `mutableUsers` on and off to make it work!
+        # hashedPassword ="*****"; # Use `mkpasswd -m sha-512` to generate it. Sometimes you need to turn the `mutableUsers` on and off to make it work!
         # to verify the hash observe that hash has $6$salt$HASH structure where you can run `mkpasswd -m sha-512 -S salt` to check the HASH
-        openssh.authorizedKeys.keys = [
-          "ssh-rsa AAAAB3Nz....6OWM= user"
-          # note: ssh-copy-id will add user@clientmachine after the public key
-          # but we can remove the "@clientmachine" part
-        ];
+
+        # openssh.authorizedKeys.keys = [
+        #   "ssh-rsa AAAAB3Nz....6OWM= user"
+        #   # note: ssh-copy-id will add user@clientmachine after the public key
+        #   # but we can remove the "@clientmachine" part
+        # ];
         shell = pkgs.zsh;
       };
 
@@ -76,7 +75,7 @@ Also the `network.nix` is ommited too.
 ```nix
 { config, pkgs, ...}:
 let
-  address = "192.168.1.1";
+  address = "192.168.2.1";
   port = 123;
 in
 {
@@ -101,6 +100,7 @@ in
       allowedTCPPorts = [];
       allowedUDPPorts = [];
     };
+    # run ifconfig to find the name of your wifi interface
     interfaces.wlp0s20f3.ipv4.addresses = [{
       address = address;
       prefixLength = 28;
@@ -108,3 +108,10 @@ in
   };
 }
 ```
+
+And finally, run
+```
+nixos-install --flake .#darter
+reboot
+```
+to finish the installation.

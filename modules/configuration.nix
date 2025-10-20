@@ -2,27 +2,6 @@
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  boot = {
-    kernelParams = [ "quiet" ];
-    plymouth.enable = true;
-    supportedFilesystems = [ "btrfs" ];
-    loader = {
-      efi.canTouchEfiVariables = true;
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        configurationLimit = 40;
-      };
-    };
-    initrd = {
-      luks.devices = {
-        root = {
-          device = "/dev/disk/by-uuid/b100697a-2d7d-436b-90ac-00f71bb55a1e";
-        };
-      };
-    };
-  };
 
   # Set your time zone.
   time.timeZone = "Canada/Eastern";

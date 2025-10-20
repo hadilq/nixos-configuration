@@ -8,13 +8,14 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./boot.nix
-      ./users.nix
-      ./network.nix
-      ./microvm.nix
-      ./apps/apps.nix
-      ./apps/virtualisation.nix
-      ./cosmic.nix
+      ../modules/configuration.nix
+      ../users.nix
+      ../network.nix
+      ../modules/microvm.nix
+      ../modules/apps.nix
+      ../modules/virtualisation.nix
+      ../modules/cosmic.nix
+      ../modules/accelerated-video-playback.nix
     ];
 
   # This value determines the NixOS release from which the default
@@ -23,7 +24,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }
 
