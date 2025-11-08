@@ -9,13 +9,6 @@
     [
       ./hardware-configuration.nix
       ../modules/configuration.nix
-      ../users.nix
-      ../network.nix
-      ../modules/microvm.nix
-      ../modules/apps.nix
-      ../modules/virtualisation.nix
-      ../modules/cosmic.nix
-      ../modules/accelerated-video-playback.nix
     ];
 
   # This value determines the NixOS release from which the default

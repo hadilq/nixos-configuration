@@ -2,8 +2,8 @@
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.11.1";
     nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
-    #nixpkgs-master.url = "github:nixos/nixpkgs/e996452203349694b96e4b30f25f13dbb37c13f0";
-    nixpkgs-master.follows = "nixos-cosmic/nixpkgs";
+    nixpkgs-master.url = "github:nixos/nixpkgs/dbc2252f27e4125f5ceb8bdaa0091d3e4d78edd0";
+    #nixpkgs-master.follows = "nixos-cosmic/nixpkgs";
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
     };
@@ -14,33 +14,22 @@
   };
 
   outputs = { self, determinate, nixpkgs, nixpkgs-master, nixos-cosmic, microvm, ... }@attrs:
-  let
-    cosmic-modules = [
-      {
-        nix.settings = {
-          substituters = [ "https://cosmic.cachix.org/" ];
-          trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-        };
-      }
-      nixos-cosmic.nixosModules.default
-    ];
-  in
   {
-    nixosConfigurations.darter = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.darter = nixpkgs-master.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = attrs;
       modules = [
         determinate.nixosModules.default
-        microvm.nixosModules.host
+        #microvm.nixosModules.host
         ./darter/configuration.nix
-      ] ++ cosmic-modules;
+      ];
     };
 
     nixosConfigurations.macy = nixpkgs-master.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = attrs;
       modules = [
-        microvm.nixosModules.host
+        #microvm.nixosModules.host
         ./macy/configuration.nix
       ];
     };
