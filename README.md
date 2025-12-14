@@ -1,6 +1,6 @@
 # NixOS configuration
 
-My NixOS configuration after installing it like [this](https://gist.github.com/hadilq/f12f5378b74f1bdd440144373dfc5687).
+My NixOS configuration after following [this guide](https://gist.github.com/hadilq/a491ca53076f38201a8aa48a0c6afef5) to install it.
 
 You need to adjust the `hardware-configuration.nix` file according to the generated one after running
 ```
@@ -115,3 +115,37 @@ nixos-install --flake .#darter
 reboot
 ```
 to finish the installation.
+
+# Emergency
+If you followed the above [guide](https://gist.github.com/hadilq/a491ca53076f38201a8aa48a0c6afef5) to install,
+you will find below script, which is a part of script in that guide, useful.
+
+```bash
+set -euxo pipefail
+
+DISK=/dev/nvme0n1
+cryptsetup open "$DISK"p2 enc
+
+swapon /dev/lvm/swap
+
+# Mount the directories
+
+mount -o subvol=root,compress=zstd,noatime /dev/lvm/root /mnt
+
+mount -o subvol=home,compress=zstd,noatime /dev/lvm/root /mnt/home
+
+mount -o subvol=nix,compress=zstd,noatime /dev/lvm/root /mnt/nix
+
+mount -o subvol=persist,compress=zstd,noatime /dev/lvm/root /mnt/persist
+
+mount -o subvol=log,compress=zstd,noatime /dev/lvm/root /mnt/var/log
+
+# don't forget this!
+mount "$DISK"p1 /mnt/boot
+
+rm /mnt/etc/NIXOS
+
+cd /mnt/persist/etc/nixos
+nixos-install --flake .#darter
+reboot
+```
