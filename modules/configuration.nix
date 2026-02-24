@@ -39,6 +39,8 @@
   # virtual pdf printer backend. FYI, check /var/spool/cups-pdf-pdf/users/${USER} for the PDFs.
   services.printing.cups-pdf.enable = true;
 
+  services.gnome.gnome-keyring.enable = true;
+
   security = {
     # PipeWire dependency
     rtkit.enable = true;
