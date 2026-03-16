@@ -8,6 +8,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./nvidia-egpu.nix
       ../modules/configuration.nix
     ];
 

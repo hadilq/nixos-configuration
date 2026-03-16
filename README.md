@@ -105,6 +105,9 @@ in
       address = address;
       prefixLength = 28;
     }];
+    hosts = {
+      "192.186.2.10" = ["mini-pc"];
+    };
   };
 }
 ```

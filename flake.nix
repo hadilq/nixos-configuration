@@ -1,4 +1,6 @@
 {
+  description = "NixOS baremetal configuration";
+
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.13";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
