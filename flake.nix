@@ -29,6 +29,14 @@
         ];
       };
 
+      nixosConfigurations.mini = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = attrs;
+        modules = [
+          ./mini/configuration.nix
+        ];
+      };
+
       nixosConfigurations.macy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = attrs;
