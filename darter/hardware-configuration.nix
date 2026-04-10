@@ -1,9 +1,14 @@
-{ config, lib, modulesPath, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   boot = {
     kernelParams = [ "quiet" ];
@@ -27,46 +32,66 @@
     };
   };
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
-      fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
-    };
-
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
-      fsType = "btrfs";
-      options = [ "subvol=persist" "compress=zstd" "noatime" ];
-      neededForBoot = true;
-    };
-
-  fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
-      fsType = "btrfs";
-      options = [ "subvol=log" "compress=zstd" "noatime" ];
-      neededForBoot = true;
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3C6D-3824";
-      fsType = "vfat";
-    };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/61c80561-8301-4952-b124-278544929d02"; }
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
+    fsType = "btrfs";
+    options = [
+      "subvol=root"
+      "compress=zstd"
+      "noatime"
     ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
+    fsType = "btrfs";
+    options = [
+      "subvol=home"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
+    fsType = "btrfs";
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
+    fsType = "btrfs";
+    options = [
+      "subvol=persist"
+      "compress=zstd"
+      "noatime"
+    ];
+    neededForBoot = true;
+  };
+
+  fileSystems."/var/log" = {
+    device = "/dev/disk/by-uuid/dadcb08f-19d0-4c82-96ea-73962fa1f2de";
+    fsType = "btrfs";
+    options = [
+      "subvol=log"
+      "compress=zstd"
+      "noatime"
+    ];
+    neededForBoot = true;
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/3C6D-3824";
+    fsType = "vfat";
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/61c80561-8301-4952-b124-278544929d02"; }
+  ];
 
   hardware.system76.enableAll = true;
   hardware.system76.kernel-modules.enable = true;

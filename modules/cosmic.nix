@@ -5,4 +5,3 @@
     displayManager.cosmic-greeter.enable = true;
   };
 }
-

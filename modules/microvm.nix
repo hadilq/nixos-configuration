@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 let
   maxVMs = 5;
   lib = pkgs.lib;
@@ -10,11 +10,18 @@ in
         map (index: {
           name = "virbr-vm${toString index}";
           value = {
-            allowedTCPPorts = [ 22 80 443 2222 ];
+            allowedTCPPorts = [
+              22
+              80
+              443
+              2222
+            ];
           };
         }) (lib.genList (i: i + 1) maxVMs)
       );
-      trustedInterfaces = builtins.map (index:  "virbr-vm${toString index}") (lib.genList (i: i + 1) maxVMs);
+      trustedInterfaces = builtins.map (index: "virbr-vm${toString index}") (
+        lib.genList (i: i + 1) maxVMs
+      );
     };
   };
 
@@ -33,11 +40,14 @@ in
             "fec0::/128"
           ];
           # Setup routes to the VM
-          routes = [ {
-            Destination = "10.0.0.${toString index}/32";
-          } {
-            Destination = "fec0::${lib.toHexString index}/128";
-          } ];
+          routes = [
+            {
+              Destination = "10.0.0.${toString index}/32";
+            }
+            {
+              Destination = "fec0::${lib.toHexString index}/128";
+            }
+          ];
           # Enable routing
           networkConfig = {
             IPv4Forwarding = true;

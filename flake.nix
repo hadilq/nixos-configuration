@@ -10,26 +10,34 @@
     };
   };
 
-  outputs = { self, determinate, nixpkgs, microvm, ... }@attrs:
-  {
-    nixosConfigurations.darter = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = attrs;
-      modules = [
-        determinate.nixosModules.default
-        #microvm.nixosModules.host
-        ./darter/configuration.nix
-      ];
-    };
+  outputs =
+    {
+      self,
+      determinate,
+      nixpkgs,
+      microvm,
+      ...
+    }@attrs:
+    {
+      nixosConfigurations.darter = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = attrs;
+        modules = [
+          determinate.nixosModules.default
+          #microvm.nixosModules.host
+          ./darter/configuration.nix
+        ];
+      };
 
-    nixosConfigurations.macy = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = attrs;
-      modules = [
-        #microvm.nixosModules.host
-        ./macy/configuration.nix
-      ];
+      nixosConfigurations.macy = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = attrs;
+        modules = [
+          #microvm.nixosModules.host
+          ./macy/configuration.nix
+        ];
+      };
+
+      formatter."x86_64-linux" = nixpkgs.legacyPackages."x86_64-linux".nixfmt-tree;
     };
-  };
 }
-

@@ -1,19 +1,19 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ../users.nix
-      ../network.nix
-      ./microvm.nix
-      ./apps.nix
-      ./virtualisation.nix
-      ./cosmic.nix
-      ./accelerated-video-playback.nix
-      ./btrfs-diff-command.nix
-    ];
+  imports = [
+    ./microvm.nix
+    ./apps.nix
+    ./virtualisation.nix
+    ./cosmic.nix
+    ./accelerated-video-playback.nix
+    ./btrfs-diff-command.nix
+  ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Set your time zone.
   time.timeZone = "Canada/Eastern";

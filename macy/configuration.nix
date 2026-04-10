@@ -5,11 +5,12 @@
 { ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../modules/configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../modules/configuration.nix
+    ./users.nix
+    ./network.nix
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -20,4 +21,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

@@ -105,9 +105,6 @@ in
       address = address;
       prefixLength = 28;
     }];
-    hosts = {
-      "192.186.2.10" = ["mini-pc"];
-    };
   };
 }
 ```
@@ -119,6 +116,12 @@ reboot
 ```
 to finish the installation.
 
+# Remote
+In case of remote configuration run something like this
+```
+$ nixos-rebuild switch --flake .#mini --target-host root@minipc
+```
+
 # Emergency
 If you followed the above [guide](https://gist.github.com/hadilq/a491ca53076f38201a8aa48a0c6afef5) to install,
 you will find below script, which is a part of script in that guide, useful.
@@ -128,6 +131,8 @@ set -euxo pipefail
 
 DISK=/dev/nvme0n1
 cryptsetup open "$DISK"p2 enc
+
+sleep 2
 
 swapon /dev/lvm/swap
 
@@ -152,3 +157,4 @@ cd /mnt/persist/etc/nixos
 nixos-install --flake .#darter
 reboot
 ```
+

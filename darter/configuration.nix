@@ -5,12 +5,12 @@
 { ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./nvidia-egpu.nix
-      ../modules/configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../modules/configuration.nix
+    ./users.nix
+    ./network.nix
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -21,4 +21,3 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-

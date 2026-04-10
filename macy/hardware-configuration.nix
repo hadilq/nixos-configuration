@@ -1,10 +1,15 @@
-{ config, lib, modulesPath, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
-  imports =
-    [ (modulesPath + "/hardware/network/broadcom-43xx.nix")
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/hardware/network/broadcom-43xx.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   boot = {
     kernelModules = [ "kvm-intel" ];
@@ -22,7 +27,13 @@
       };
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
       kernelModules = [ "dm-snapshot" ];
       luks.devices = {
         root = {
@@ -32,45 +43,48 @@
     };
   };
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
-      fsType = "btrfs";
-      options = [ "subvol=root" ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
+    fsType = "btrfs";
+    options = [ "subvol=root" ];
+  };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
-      fsType = "btrfs";
-      options = [ "subvol=home" ];
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
+    fsType = "btrfs";
+    options = [ "subvol=home" ];
+  };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
-      fsType = "btrfs";
-      options = [ "subvol=nix" ];
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
+    fsType = "btrfs";
+    options = [ "subvol=nix" ];
+  };
 
-  fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
-      fsType = "btrfs";
-      options = [ "subvol=persist" ];
-    };
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
+    fsType = "btrfs";
+    options = [ "subvol=persist" ];
+  };
 
-  fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
-      fsType = "btrfs";
-      options = [ "subvol=log" ];
-    };
+  fileSystems."/var/log" = {
+    device = "/dev/disk/by-uuid/a665129d-4ca4-4aad-8032-cbb2e40071da";
+    fsType = "btrfs";
+    options = [ "subvol=log" ];
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/FA0A-5C49";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/f79960df-1e31-4d44-9fa2-5d5db8aed160"; }
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/FA0A-5C49";
+    fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
     ];
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/f79960df-1e31-4d44-9fa2-5d5db8aed160"; }
+  ];
 
   networking.hostName = "macy"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -80,4 +94,3 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
-
