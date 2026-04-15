@@ -8,6 +8,10 @@
 {
   # LAN cable
   networking = {
+    firewall = {
+      enable = true;
+      trustedInterfaces = [ "enp12s0" ];
+    };
     interfaces.enp12s0 = {
       ipv4.addresses =[
         {

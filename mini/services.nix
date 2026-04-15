@@ -19,6 +19,12 @@
 
   # LAN cable
   networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 22 ];
+      allowedUDPPorts = [ ];
+      trustedInterfaces = [ "enp2s0" ];
+    };
     interfaces.enp2s0 = {
       ipv4.addresses =[
         {
