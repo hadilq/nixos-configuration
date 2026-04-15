@@ -29,5 +29,6 @@
 
   programs.git = {
     enable = true;
+    config = [ { core.editor = "vim"; } ];
   };
 }
