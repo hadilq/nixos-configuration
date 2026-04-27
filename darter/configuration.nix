@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./commands.nix
     ../modules/configuration.nix
     ./users.nix
     ./network.nix

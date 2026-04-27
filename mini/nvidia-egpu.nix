@@ -23,5 +23,15 @@
   };
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia-container-toolkit.enable = true;
-  environment.etc."cdi/nvidia-container-toolkit.json".source = "/run/cdi/nvidia-container-toolkit.json";
+  environment = {
+    etc."cdi/nvidia-container-toolkit.json".source = "/run/cdi/nvidia-container-toolkit.json";
+    systemPackages = with pkgs; [
+      nvidia-container-toolkit
+    ];
+  };
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 }
