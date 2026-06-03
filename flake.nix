@@ -2,10 +2,10 @@
   description = "NixOS baremetal configuration";
 
   inputs = {
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.13";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3.21";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     microvm = {
-      url = "github:astro/microvm.nix";
+      url = "github:astro/microvm.nix/0d49083ba2d7419b22908ac392777c16df9a032e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
